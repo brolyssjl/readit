@@ -1,7 +1,6 @@
 class StoriesController < ApplicationController
   def index
-    # @story = Story.find_by(name: 'SitePoint Forums')
-    @story = Story.order('RANDOM()').first
+    @story = Story.order(Arel.sql('RANDOM()')).first
   end
 
   def new
