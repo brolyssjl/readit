@@ -1,0 +1,6 @@
+$("#vote_score").html("Score: " + <%= @story.votes.size %>)
+$("#vote_score").css({backgroundColor: "#ffffcc"});
+
+setTimeout(function(){
+	$("#vote_score").css({backgroundColor: "#ffffff"});
+}, 2000);
