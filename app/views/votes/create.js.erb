@@ -1,0 +1,1 @@
+$("#vote_history").html('<%= j(render partial: "votes/vote", collection: @story.votes.latest) %>')
