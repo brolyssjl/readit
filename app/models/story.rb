@@ -1,5 +1,4 @@
 class Story < ApplicationRecord
-  # attribute :is_publish, :boolean
   validates :name, :link, presence: true
   belongs_to :user
   has_many :votes do
@@ -7,6 +6,8 @@ class Story < ApplicationRecord
       order('id DESC').limit(3)
     end
   end
+  scope :upcoming, -> { where('votes_count < 5').order('id DESC') }
+  scope :popular, -> { where('votes_count >= 5').order('id DESC') }
 
   def to_param
     "#{id}-#{name.gsub(/\W/, '-').downcase}"

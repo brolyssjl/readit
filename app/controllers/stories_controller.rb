@@ -2,7 +2,11 @@ class StoriesController < ApplicationController
   before_action :ensure_login, only: [:new, :create]
 
   def index
-    @story = Story.order(Arel.sql('RANDOM()')).first
+    # @story = Story.order(Arel.sql('RANDOM()')).first
+    # Using counter cache
+    # fetch_stories 'votes_count >= 5' protected method
+    # Using scopes
+    @stories = Story.popular
   end
 
   def new
@@ -23,6 +27,18 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
   end
+
+  def bin
+    # fetch_stories 'votes_count < 5' Protected method
+    # Using scopes
+    @stories = Story.upcoming
+    render action: 'index'
+  end
+
+  # protected
+  # def fetch_stories(conditions)
+  #   @stories = Story.where(conditions).order('id DESC')
+  # end
 
   private
   def story_params
