@@ -14,10 +14,19 @@
   <span><%= @story.user.name %></span>
 </p>
 <p><%= link_to @story.link, @story.link %></p>
-<div id="vote_form">
-  <%= form_for [@story, Vote.new], remote: true do %>
-    <!-- Need this tag because of cases where JS is off -->
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <%= submit_tag 'Vote for it' %>
-  <% end %>
-</div>
+<% if logged_in? %>
+  <div id="vote_form">
+    <%= form_for [@story, Vote.new], remote: true do %>
+      <!-- Need this tag because of cases where JS is off -->
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= submit_tag 'Vote for it' %>
+    <% end %>
+  </div>
+<% else %>
+  <p>
+    <em>
+      You would be able to vote for this story if you were
+      <%= link_to 'logged in', new_session_path %>!
+    </em>
+  </p>
+<% end %>
