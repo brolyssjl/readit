@@ -4,6 +4,6 @@ module StoriesHelper
       when 'index' then 'front-page story'
       when 'bin' then 'upcoming story'
       end
-    "showing #{ pluralize(@stories.size, story_type) }"
+    "Showing #{ pluralize(@stories.size, story_type) }"
   end
 end
