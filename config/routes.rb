@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'stories#index'
+  resources :tags
   resource :session
   resources :users
   resources :stories do
